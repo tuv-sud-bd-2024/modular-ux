@@ -233,3 +233,38 @@ Implement the project skeleton with:
 - registry and dependency graph validator
 - PostgreSQL repository layer for Aiven
 - standalone module test harness
+
+---
+
+## 13) Current Prototype (SQLite-first)
+
+For easy local understanding, a lightweight prototype is included with SQLite (to be migrated to PostgreSQL later).
+
+### 13.1 What is implemented
+- `dealers` table in SQLite with columns:
+	- `id`
+	- `dealer_name`
+	- `dealer_code`
+	- `is_on_leave` (default `false` via `0`)
+	- `single_transaction_limit`
+	- `daily_limit`
+	- `yearly_limit`
+	- `primary_user` (default `true` via `1`)
+- Base UX in Streamlit containing two mini forms:
+	- Mini form 1: `Dealer Name`, `Dealer Code`
+	- Mini form 2: `Currency`, `Amount`
+- Dynamic validation:
+	- If `Amount` exceeds dealer `single_transaction_limit`, submit is disabled and label shows: `Single transaction limit crossed.`
+	- If within limit, submit is enabled (when required fields are valid).
+- On submit, values are printed to terminal.
+
+### 13.2 Run locally
+1. Install dependencies:
+	 - `python3 -m pip install -r requirements.txt`
+2. Run Streamlit app:
+	 - `streamlit run app.py`
+
+### 13.3 Files
+- `app.py`: Base UX + validation + submit behavior
+- `db.py`: SQLite setup and dealer table bootstrap
+- `data/app.db`: SQLite database file (created automatically on first run)
