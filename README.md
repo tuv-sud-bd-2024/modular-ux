@@ -268,3 +268,25 @@ For easy local understanding, a lightweight prototype is included with SQLite (t
 - `app.py`: Base UX + validation + submit behavior
 - `db.py`: SQLite setup and dealer table bootstrap
 - `data/app.db`: SQLite database file (created automatically on first run)
+
+### 13.4 Run Guide (Modular UX)
+
+#### Module layout
+- `app.py`: App entrypoint (initializes DB and launches base screen)
+- `base_ux.py`: Host/Base UX (embeds mini UX modules and submit button)
+- `mini_ux_dealer.py`: Dealer mini UX (Dealer Name list from table + Dealer Code)
+- `mini_ux_transaction.py`: Transaction mini UX (`Currency`, `Amount`)
+- `config_module.py`: Dealer config CRUD (add/edit/delete dealer table records)
+- `db.py`: SQLite schema and data access helpers
+
+#### How to use
+1. Start app:
+	- `streamlit run app.py`
+2. In **Config Module**, add or update dealer records as needed.
+3. In Base UX:
+	- Select `Dealer Name` from list (loaded dynamically from DB)
+	- Enter `Currency` and `Amount`
+4. Submit behavior:
+	- If amount > `single_transaction_limit`, submit stays disabled and warning label is shown.
+	- If amount <= limit, submit is enabled.
+5. On submit, payload is printed in terminal output.
