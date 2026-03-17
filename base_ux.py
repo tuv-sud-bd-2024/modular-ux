@@ -4,15 +4,12 @@ import json
 
 import streamlit as st
 
-from config_module import render_dealer_config
 from mini_ux_dealer import render_dealer_mini_ux
 from mini_ux_transaction import render_transaction_mini_ux
 
 
 def render_base_ux() -> None:
     st.title("Base UX")
-    render_dealer_config()
-    st.divider()
 
     dealer_name, dealer_code, selected_dealer = render_dealer_mini_ux()
     currency, amount = render_transaction_mini_ux()

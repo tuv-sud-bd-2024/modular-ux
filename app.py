@@ -8,5 +8,5 @@ from db import init_db, seed_dealers
 init_db()
 seed_dealers()
 
-st.set_page_config(page_title="Modular UX - Base Form", layout="centered")
+st.set_page_config(page_title="Base UX", layout="centered")
 render_base_ux()
